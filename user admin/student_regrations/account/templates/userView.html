@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+    .kk{
+        margin-top: 100px;
+        margin-left: 300px;
+
+      }
+    #pp{
+      margin-left: 80px;
+    }
+      
+    </style>
+</head>
+<body>
+    
+
+<div class="container my-3">
+ <div class="row">
+  
+<form  method="GET" >
+  {% csrf_token %}
+  <select name="search" id="search" class="kk">
+    <option >All</option>
+    <option >gender</option>
+    <option >hobbies</option>
+    <option >username</option>
+    
+  </select> 
+<input type="text" name="search1" placeholder="search">
+<button type="submit">search</button>
+</form>
+   
+   <div class="col-sm-9 col-md">
+    <table border="3px" class="table table-striped" id="pp">
+     
+        <tr class='bg-success'>
+            <td colspan="10" align="center"><h2> User Profile </h2></td>
+        </tr>
+          <tr>
+            <th>S.No</th>
+            <th> I.D </th>
+            <th> UserName</th>
+            <th> First Name </th>
+            <th> Last Name </th>
+            <th> Email  </th>
+            <th> Mobile Number</th>
+            <th> Address</th>
+            <th> gender</th>
+            <th> hobbies</th>
+            <th> Profle Image</th>
+            <th colspan="2" align="center" ><button> Edit Profile</button></th>
+           
+          </tr>
+
+
+        {% for data in data %}
+         <tr>   
+            <td>{{forloop.counter}}</td> 
+            <td>{{data.id}}</td> 
+            <td>{{data.user.username}}</td> 
+            <td>{{data.user.first_name}}</td> 
+            <td>{{data.user.last_name}}</td> 
+            <td>{{data.user.email}}</td> 
+            <td>{{data.mobile_number}}</td> 
+            <td>{{data.address}}</td> 
+            <td>{{data.gender}}</td> 
+            <td>{{data.hobbies}}</td> 
+            {% if data.profile %}
+            <td><h4><img style="height: 40px; width: 40px;" src="{{data.profile.url}}" alt="" ></h4></td>
+            {% else %}
+            <td><h4><img style="height: 40px; width: 40px;" src="" alt="" ></h4></td>
+            {% endif %}
+            
+            
+            
+            <td><a href="{% url 'useredit' data.id %}" class="btn btn-primary">Edit</a></td>
+            
+            <td><a href="{% url 'userdelete' data.user.id %}" class="btn btn-danger">Delete</a></td>
+        </tr>
+        {% endfor %}
+      
+    </table>
+  </div>
+  </div>
+  
+  
+ </div>
+
+</div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+

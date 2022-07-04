@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+
+    <title>User Login</title>
+    <style>
+      body{
+        color:cadetblue;
+      }
+      
+
+    </style>
+</head>
+<body>
+  {{request.user}}
+    <div class="container">
+        <div class="row my-3">
+         <div class="col-sm-6 offset-sm-3">
+            
+          <h1 class="btn-primary"  align="center">User Registrations</h1>
+          <hr>
+          <form action="" method="post" enctype="multipart/form-data" novalidate class=" shadow p-5">
+              {% if messages %}
+              {% for messages in messages  %}
+              <p class="alert alert-danger my-3">{{messages}}</p>
+              {% endfor %}
+                
+              {% endif %}
+            
+           {% csrf_token %}
+        {% for fm in form %}
+        <div class="form-group mb-3">
+           <h5>{{fm.label_tag}}</h5>{{fm}} <small class="text-danger">{{fm.errors}}   </small>
+          </div>
+        {% endfor %}
+       
+       <div class="text-end">
+       <button type="submit" class="btn btn-danger">Submit</button>
+       </div>
+       
+       <br>
+           {% if form.non_field_errors %}
+           {% for error in form.non_field_errors %}
+           <p class="alert alert-danger my-3">{{error}}</p>
+           {% endfor %}
+           {% endif %}
+       <br>
+       <!-- <small><a href="{% url 'resetpassword' %}">Forgot Password ?</a></small> <br> -->
+           
+           
+       
+       </form>
+           
+         </div>
+        </div>
+       </div>
+
+       <!-- Jquery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+    
+    
+</body>
+</html>
+
+
+
